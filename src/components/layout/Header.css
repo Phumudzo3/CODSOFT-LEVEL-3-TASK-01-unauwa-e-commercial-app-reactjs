@@ -1,0 +1,104 @@
+.header
+{
+    height: 100px;
+    display: flex;
+    align-items: center;
+    background:  #0f1111;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    justify-content: space-evenly;
+}
+.header_logoSection{
+    display: flex;
+    justify-content: space-between;
+    width: 30vw;
+
+}
+.header_logo{
+    width: 200px;
+    height: 100px;
+    object-fit: cover;
+    margin: 0 20px;
+    margin-top: 3px;
+}
+
+.header_search{
+    display: flex;
+    flex: 5;
+    align-items: center;
+    width: 10vw;
+   
+}
+
+.header_input{
+    height: 12px;
+    padding: 10px;
+    border: none;
+    width: 50%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.search_icon{
+    padding: 5px;
+    height: 22px !important;
+   
+}
+.searchicon{
+    background: olivedrab;
+    padding: 4px 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.header_nav{
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    margin-right: 40px;
+}
+.header_option{
+    display: flex;
+    flex-direction: column;
+    
+    margin-right: 30px;
+    color: white;
+    
+    justify-content: center;
+}
+
+.header_optionOne{
+    font-size: 12px;
+   
+    align-items: center;
+}
+
+.header_optionTwo{
+    font-size: 13px;
+    font-weight: 800;
+    align-items: center;
+    color: white;
+}
+.header_optionBasket{
+    display: flex;
+    align-items: center;
+    color:white;
+
+}
+.header_basketCount{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

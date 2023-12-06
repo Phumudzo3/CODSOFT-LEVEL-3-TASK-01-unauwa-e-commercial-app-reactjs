@@ -1,0 +1,17 @@
+.orders{
+    padding:  20px 80px;
+    
+}
+h1{
+    text-align: center;
+}
+
+.orders>h1{
+ margin: 30px 0;   
+}
+orders_order{
+    width: 100vw;
+    height: 60vh;
+    background: palegreen;
+
+}

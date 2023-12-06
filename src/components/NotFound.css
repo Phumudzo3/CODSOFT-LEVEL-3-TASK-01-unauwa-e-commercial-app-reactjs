@@ -1,0 +1,11 @@
+.not_found{
+    display: block;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+  background: white;
+}
+
+not_found >img{
+    margin-top: 50px;
+}
