@@ -12,3 +12,16 @@
 .rating{
   padding: 0px auto;
 }
+@media (max-width: 768px) {
+  .products_row{
+    display: block;
+    margin-right: 10px;
+  }{
+
+  }
+  .filter_buttons{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+}

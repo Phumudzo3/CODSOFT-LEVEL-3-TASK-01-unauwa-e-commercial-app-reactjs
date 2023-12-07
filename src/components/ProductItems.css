@@ -45,3 +45,16 @@
    
   
 }
+@media (max-width: 768px) {
+    .product{
+      
+     position: relative;
+     right: 40px;
+    }
+
+    .product_rating,.product_price{
+        display: flex;
+    justify-content: center;
+    }
+}
+  
