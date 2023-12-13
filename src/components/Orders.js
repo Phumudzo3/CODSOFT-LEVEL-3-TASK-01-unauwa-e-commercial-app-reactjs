@@ -34,7 +34,7 @@ function Orders () {
 
   return (
     <div>
-      <h1>Your orders </h1>
+      <h1>Your order history </h1>
 
       <div className="orders_order">
         {orders?.map((order) => (
