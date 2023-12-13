@@ -1,78 +1,86 @@
-import React, { useContext, useState, useEffect } from "react";
-import axios from '../Axios';
-import CurrencyFormat from "react-currency-format";
-import shoppingContext from "./context/shopping/ShoppingContext";
-import CheckOutProduct from "./CheckOutProduct";
-import { Link, useHistory } from "react-router-dom";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { db } from "../firebase";
-import "./Payment.css";
+/* eslint-disable no-unused-vars */
+import React, { useContext, useState, useEffect } from 'react'
+import CurrencyFormat from 'react-currency-format'
+import { Link, useHistory } from 'react-router-dom'
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
+import axios from '../Axios'
+import shoppingContext from './context/shopping/ShoppingContext'
+import CheckOutProduct from './CheckOutProduct'
+import { db } from '../firebase'
+import './Payment.css'
 
-const Payment = () => {
-  const context = useContext(shoppingContext);
-  const { basket, user, getBasketTotal, emptyBasket } = context;
-  const stripe = useStripe();
-  const elements = useElements();
-  const history = useHistory();
-  const [succeeded, setSucceeded] = useState(false);
-  const [processing, setProcessing] = useState("");
-  const [error, setError] = useState(null);
-  const [disabled, setDisabled] = useState(true);
-  const [clientSecret, setClientSecret] = useState(true);
+function Payment () {
+  const context = useContext(shoppingContext)
+  const {
+    basket, user, getBasketTotal, emptyBasket
+  } = context
+  const stripe = useStripe()
+  const elements = useElements()
+  const history = useHistory()
+  const [succeeded, setSucceeded] = useState(false)
+  const [processing, setProcessing] = useState('')
+  const [error, setError] = useState(null)
+  const [disabled, setDisabled] = useState(true)
+  const [clientSecret, setClientSecret] = useState(true)
 
   useEffect(() => {
-    //generate the special trip will allow us to charge the customer
+    // generate the special trip will allow us to charge the customer
     const getClientSecret = async () => {
       const response = await axios({
         method: 'post',
-        url: `/payments/create?total=${getBasketTotal(basket) * 100}`,
-       
-      });
-      setClientSecret(response.data.clientSecret);
-    };
-    getClientSecret();
-  }, [basket]);
+        url: `/payments/create?total=${getBasketTotal(basket) * 100}`
 
-  console.log("the secret is", clientSecret);
+      })
+      setClientSecret(response.data.clientSecret)
+    }
+    getClientSecret()
+  }, [basket])
+
+  console.log('the secret is', clientSecret)
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setProcessing(true);
+    e.preventDefault()
+    setProcessing(true)
     const payload = await stripe
       .confirmCardPayment(clientSecret, {
-        payment_method: { card: elements.getElement(CardElement) },
+        payment_method: { card: elements.getElement(CardElement) }
       })
       .then(({ paymentIntent }) => {
-         //payment intent =payment confrimation
-        db.collection("user")
+        // payment intent =payment confrimation
+        db.collection('user')
           .doc(user?.uid)
-          .collection("orders")
+          .collection('orders')
           .doc(paymentIntent.id)
           .set({
-            basket: basket,
+            basket,
             amount: paymentIntent.amount,
-            created: paymentIntent.created,
-          });
-       
-        setSucceeded(true);
-        setError(null);
-        setProcessing(false);
+            created: paymentIntent.created
+          })
+
+        setSucceeded(true)
+        setError(null)
+        setProcessing(false)
         // empty nasket
-        emptyBasket();
+        emptyBasket()
         // redirect the user to order page
-        history.push("/order");
-      });
-  };
+        history.push('/order')
+      })
+  }
   const handleChange = (e) => {
-    setDisabled(e.empty);
-    setError(e.error ? e.error.message : "");
-  };
+    setDisabled(e.empty)
+    setError(e.error ? e.error.message : '')
+  }
 
   return (
     <div className="payment">
       <div className="payment_container">
         <h1>
-          Checkout<Link to="/checkout">{basket?.length} items</Link>
+          Checkout
+          <Link to="/checkout">
+            {basket?.length}
+            {' '}
+            items
+          </Link>
         </h1>
         <div className="payment_section">
           <div className="payment_title">
@@ -105,20 +113,25 @@ const Payment = () => {
             <h3>Payment Method</h3>
           </div>
           <div className="payment_detals">
-            {/*Stripe code will gohere*/}
+            {/* Stripe code will gohere */}
             <form onSubmit={handleSubmit}>
               <CardElement onChange={handleChange} />
               <div className="payment_price_container">
                 <CurrencyFormat
-                  renderText={(value) => <h3>Order total:{value} </h3>}
+                  renderText={(value) => (
+                    <h3>
+                      Order total:
+                      {value}
+                    </h3>
+                  )}
                   decimalScale={2}
                   value={getBasketTotal(basket)}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"$"}
+                  displayType="text"
+                  thousandSeparator
+                  prefix="$"
                 />
                 <button disabled={processing || disabled || succeeded}>
-                  <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
+                  <span>{processing ? <p>Processing</p> : 'Buy Now'}</span>
                 </button>
               </div>
               {error && <div>{error}</div>}
@@ -127,7 +140,7 @@ const Payment = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Payment;
+export default Payment

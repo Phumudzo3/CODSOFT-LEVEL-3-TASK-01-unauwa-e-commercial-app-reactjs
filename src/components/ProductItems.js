@@ -1,15 +1,21 @@
-import shoppingContext from "./context/shopping/ShoppingContext";
-import React, { useContext } from "react";
+/* eslint-disable react/prop-types */
+import React, { useContext } from 'react'
+import shoppingContext from './context/shopping/ShoppingContext'
 
-import "./ProductItems.css";
+import './ProductItems.css'
 
-const Product = ({ id, image, title, rating, price }) => {
-  const context = useContext(shoppingContext);
-  const { addToBasket } = context;
+function Product ({
+  id, image, title, rating, price
+}) {
+  const context = useContext(shoppingContext)
+  const { addToBasket } = context
   const AddToBasketHandler = () => {
-    addToBasket({item:{  id, image, title, rating, price
-     } });
-  };
+    addToBasket({
+      item: {
+        id, image, title, rating, price
+      }
+    })
+  }
   return (
     <div className="product" key={id}>
       <img src={image} alt="" />
@@ -19,16 +25,16 @@ const Product = ({ id, image, title, rating, price }) => {
           {Array(rating)
             .fill()
             .map((_, i) => (
-              <p key={i} >⭐</p>
+              <p key={i}>⭐</p>
             ))}
         </div>
-        <p className="product_price">{"$"+ price}</p>
+        <p className="product_price">{`$${price}`}</p>
       </div>
       <button className="product_button" onClick={AddToBasketHandler}>
         Add to basket
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product

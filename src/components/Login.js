@@ -1,43 +1,41 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import "./Login.css";
+/* eslint-disable react/no-unescaped-entities */
+import React, { useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import './Login.css'
 
-import { auth } from "../firebase";
+import { auth } from '../firebase'
 
-
-
-const Login = () => {
-  const history=useHistory();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState("");
-
+function Login () {
+  const history = useHistory()
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState('')
 
   const signInHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     auth.signInWithEmailAndPassword(email, password)
       .then((auth) => {
-        history.push("/");
+        history.push('/')
       })
-      .catch((error) => alert(error.message));
-  };
+      .catch((error) => alert(error.message))
+  }
   const register = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((auth) => {
         if (auth) {
-          history.push("/");
+          history.push('/')
         }
       })
-      .catch((error) => alert(error.message));
-  };
+      .catch((error) => alert(error.message))
+  }
 
   return (
     <div className="login">
-      
+
       <Link to="/">
         <img
-         src="/asset/Nauwa shop.png"
+          src="/asset/Nauwa shop.png"
           alt="logo"
           className="login_logo"
         />
@@ -77,7 +75,7 @@ const Login = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
