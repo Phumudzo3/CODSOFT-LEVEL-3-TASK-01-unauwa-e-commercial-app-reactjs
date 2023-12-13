@@ -1,13 +1,16 @@
-import React, { useContext } from "react";
-import shoppingContext from "./context/shopping/ShoppingContext";
-import "./CheckOutProduct.css";
+/* eslint-disable react/prop-types */
+import React, { useContext } from 'react'
+import shoppingContext from './context/shopping/ShoppingContext'
+import './CheckOutProduct.css'
 
-const CheckOutProduct = ({ id, image, title, rating, price, hideButton }) => {
-  const context = useContext(shoppingContext);
-  const { removeFromBasket } = context;
+function CheckOutProduct ({
+  id, image, title, rating, price, hideButton
+}) {
+  const context = useContext(shoppingContext)
+  const { removeFromBasket } = context
   const removeFromBasketHandler = () => {
-    removeFromBasket({ id: id });
-  };
+    removeFromBasket({ id })
+  }
 
   return (
     <div className="checkout_product">
@@ -30,7 +33,7 @@ const CheckOutProduct = ({ id, image, title, rating, price, hideButton }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CheckOutProduct;
+export default CheckOutProduct

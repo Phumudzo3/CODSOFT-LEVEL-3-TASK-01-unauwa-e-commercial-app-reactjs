@@ -1,0 +1,25 @@
+.header_2{
+    height: 40px;
+    display: flex;
+    align-items: center;
+   padding-left: 10px;
+    background:#131921 ;
+    color: #FFFFFF;
+}
+.nav_2  {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 14PX;
+
+}
+
+.nav_2 span{
+    padding-left: 20px; 
+}
+.menu{
+  display: flex;
+    align-items: center;
+    
+}
+

@@ -1,35 +1,36 @@
-import { useReducer } from "react";
-import shoppingContext from "./ShoppingContext";
-import { shoppingReducer } from "./ShoppingReducer";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
+import { useReducer } from 'react'
+import shoppingContext from './ShoppingContext'
+import { shoppingReducer } from './ShoppingReducer'
 
+export function ShoppingState (props) {
+  const initialState = { basket: [], user: null }
+  const [state, dispatch] = useReducer(shoppingReducer, initialState)
+  // selectors
 
-export const ShoppingState = (props) => {
-  const initialState = { basket: [], user: null };
-  const [state, dispatch] = useReducer(shoppingReducer, initialState);
-  //selectors
-
-  const getBasketTotal = (basket) =>basket?.reduce((amount, item) => item.price + amount, 0);
-  console.log('Basket:', state.basket);
-  console.log('Total:', getBasketTotal(state.basket));
-    const addToBasket = async ({item}) => {
+  const getBasketTotal = (basket) => basket?.reduce((amount, item) => item.price + amount, 0)
+  console.log('Basket:', state.basket)
+  console.log('Total:', getBasketTotal(state.basket))
+  const addToBasket = async ({ item }) => {
     dispatch({
-      type: "ADD_TO_BASKET",
-      payload: item,  
-    });
-  };
-  const emptyBasket = ()=>{
-dispatch ({
-  type: 'EMPTY_BASKET',
-  
-})
+      type: 'ADD_TO_BASKET',
+      payload: item
+    })
   }
-  const removeFromBasket=(item)=>{
-dispatch({type:"REMOVE_FROM_BASKET",payload:item})
-  }
-  const setUser=(user)=>{
+  const emptyBasket = () => {
     dispatch({
-      type:"SET_USER",
-      payload:user,
+      type: 'EMPTY_BASKET'
+
+    })
+  }
+  const removeFromBasket = (item) => {
+    dispatch({ type: 'REMOVE_FROM_BASKET', payload: item })
+  }
+  const setUser = (user) => {
+    dispatch({
+      type: 'SET_USER',
+      payload: user
     })
   }
   return (
@@ -41,10 +42,10 @@ dispatch({type:"REMOVE_FROM_BASKET",payload:item})
         addToBasket,
         setUser,
         removeFromBasket,
-        emptyBasket,
+        emptyBasket
       }}
     >
       {props.children}
     </shoppingContext.Provider>
-  );
-};
+  )
+}

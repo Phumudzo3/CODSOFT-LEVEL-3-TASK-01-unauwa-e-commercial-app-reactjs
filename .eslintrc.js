@@ -1,32 +1,37 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'commonjs': true,
-    'es6': true,
+  env: {
+    browser: true,
+    commonjs: true,
+    es2021: true
   },
-  'extends': [
-    'google',
-    'plugin:react/recommended',
+  extends: [
+    'standard',
+    'plugin:react/recommended'
   ],
-  'overrides': [
+  overrides: [
     {
-      'env': {
-        'node': true,
+      env: {
+        node: true
       },
-      'files': [
-        '.eslintrc.{js,cjs}',
+      files: [
+        '.eslintrc.{js,cjs}'
       ],
-      'parserOptions': {
-        'sourceType': 'module',
-      },
-    },
+      parserOptions: {
+        sourceType: 'script'
+      }
+    }
   ],
-  'parserOptions': {
-    'ecmaVersion': '2021',
+  parserOptions: {
+    ecmaVersion: 'latest'
   },
-  'plugins': [
-    'react',
+  plugins: [
+    'react'
   ],
-  'rules': {
+  settings: {
+    react: {
+      version: 'detect'
+    }
   },
-};
+  rules: {
+  }
+}
