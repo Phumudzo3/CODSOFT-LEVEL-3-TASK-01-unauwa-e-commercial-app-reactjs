@@ -3,10 +3,10 @@ import './Products.css'
 import Product from './ProductItems'
 
 function Products () {
-  const [filter, setFilter] = useState(null)
+  const [filterItem, setFilterItem] = useState(null)
 
-  const handleFilterChange = (category) => {
-    setFilter(category)
+  const FilterChange = (category) => {
+    setFilterItem(category)
   }
 
   const productsData = [
@@ -60,22 +60,22 @@ function Products () {
       price: 59.99,
       category: 'laptop'
     }
-    // Add more products as needed
+
   ]
 
-  const filteredProducts = filter
-    ? productsData.filter((product) => product.category === filter)
+  const filteredProducts = filterItem
+    ? productsData.filterItem((product) => product.category === filterItem)
     : productsData
 
   return (
     <>
       <div className="filter_buttons">
-        <button onClick={() => handleFilterChange(null)}>All</button>
-        <button onClick={() => handleFilterChange('phones')}>Phones</button>
-        <button onClick={() => handleFilterChange('tv')}>TV</button>
-        <button onClick={() => handleFilterChange('streaming')}>Streaming</button>
-        <button onClick={() => handleFilterChange('laptop')}>Laptop</button>
-        {/* Add more categories as needed */}
+        <button onClick={() => FilterChange(null)}>All</button>
+        <button onClick={() => FilterChange('phones')}>Phones</button>
+        <button onClick={() => FilterChange('tv')}>TV</button>
+        <button onClick={() => FilterChange('streaming')}>Streaming</button>
+        <button onClick={() => FilterChange('laptop')}>Laptop</button>
+
       </div>
 
       <div className="products_row">
